@@ -1,21 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
-    <title>
-      Evert van Groningen portfolio
-    </title>
-  </head>
-  <body>
-    <h1>
-      yooooooooo
-    </h1>
-    <nav>
-      <ul>
-        <li><a href="AboutMe.html">About me</a></li>
-        <li><a href="Projects.html">Projects</a></li>
-        <li><a href="index.html">Main</a></li>
-      </ul>
-    </nav>
-  </body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Contact</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --background-color: #f4f4f4;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        input {
+            padding: 10px;
+            width: 250px;
+            border: 2px solid var(--primary-color);
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .social-links {
+            margin-top: 20px;
+        }
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+        }
+        .social-links img {
+            width: 40px;
+            height: 40px;
+            transition: transform 0.3s;
+        }
+        .social-links img:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Contact Me</h2>
+        <input type="email" placeholder="evertvangroningnen@gmail.com">
+        <div class="social-links">
+            <a href="https://github.com/EvertVanGroningen" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
+            </a>
+            <a href="https://www.linkedin.com/in/evert-van-groningen-1614b2329/" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/61/61109.png" alt="LinkedIn">
+            </a>
+        </div>
+    </div>
+</body>
 </html>
