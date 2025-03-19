@@ -43,6 +43,24 @@
         .social-links img:hover {
             transform: scale(1.1);
         }
+        .bottom-bar {
+            background-color: var(--secondary-color);
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .bottom-bar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+        .bottom-bar a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -57,6 +75,11 @@
                 <img src="https://cdn-icons-png.flaticon.com/512/61/61109.png" alt="LinkedIn">
             </a>
         </div>
+    </div>
+    <div class="bottom-bar">
+        <a href="index.html">Home</a>
+        <a href="Projects.html">Projects</a>
+        <a href="AboutMe.html">About me</a>
     </div>
 </body>
 </html>
