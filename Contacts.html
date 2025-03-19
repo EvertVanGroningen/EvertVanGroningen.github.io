@@ -16,9 +16,6 @@
             text-align: center;
             padding: 50px;
             margin: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
         .container {
             background: white;
@@ -26,7 +23,6 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             display: inline-block;
-            flex-grow: 1;
         }
         .email {
             font-size: 18px;
@@ -50,8 +46,10 @@
         }
         .bottom-bar {
             background-color: var(--secondary-color);
-            padding: 25px;
-            position: relative;
+            padding: 25px; /* Increased height */
+            position: fixed;
+            bottom: 0;
+            left: 0;
             width: 100%;
             display: flex;
             justify-content: center;
