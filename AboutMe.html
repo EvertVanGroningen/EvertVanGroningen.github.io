@@ -44,18 +44,24 @@
             margin-left: 20px;
         }
         .bottom-bar {
-            position: absolute;
+            background-color: var(--secondary-color);
+            padding: 25px; /* Increased height */
+            position: fixed;
             bottom: 0;
+            left: 0;
             width: 100%;
-            background: var(--primary-color);
-            text-align: center;
-            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .bottom-bar a {
-            color: var(--secondary-color);
-            margin: 0 15px;
+            color: white;
             text-decoration: none;
-            font-weight: bold;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+        .bottom-bar a:hover {
+            text-decoration: underline;
         }
         .Profile-image {
             width: 50px;
