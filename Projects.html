@@ -1,21 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
-    <title>
-      Evert van Groningen portfolio
-    </title>
-  </head>
-  <body>
-    <h1>
-      yooooooooo
-    </h1>
-    <nav>
-      <ul>
-        <li><a href="AboutMe.html">About me</a></li>
-        <li><a href="index.html">Main</a></li>
-        <li><a href="Contacts.html">Contacts</a></li>
-      </ul>
-    </nav>
-  </body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Projects</title>
+    <style>
+        :root {
+            --primary-color: #2A9D8F;
+            --secondary-color: #E9C46A;
+            --background-color: #264653;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            color: white;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+        }
+        .project {
+            background: var(--primary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        .project img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 5px;
+        }
+        .project a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: var(--secondary-color);
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .footer {
+            background: var(--primary-color);
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My Projects</h1>
+        
+        <div class="project">
+            <img src="project1.gif" alt="Project 1 GIF">
+            <p>Project 1 - Description of what this project does and its features.</p>
+            <a href="https://github.com/yourgithub/project1" target="_blank">GitHub Repo</a>
+        </div>
+        
+        <div class="project">
+            <img src="project2.png" alt="Project 2 Image">
+            <p>Project 2 - Description of what this project does and its features.</p>
+            <a href="https://github.com/yourgithub/project2" target="_blank">GitHub Repo</a>
+        </div>
+        
+        <div class="project">
+            <img src="project3.png" alt="Project 3 Image">
+            <p>Project 3 - Description of what this project does and its features.</p>
+            <a href="https://github.com/yourgithub/project3" target="_blank">GitHub Repo</a>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </div>
+</body>
 </html>
