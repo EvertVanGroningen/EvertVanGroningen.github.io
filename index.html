@@ -1,22 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
-    <title>
-      Evert van Groningen portfolio
-    </title>
-  </head>
-  <body>
-    <h1>
-      yooooooooo
-    </h1>
-    <nav>
-      <ul>
-        <li><a href="AboutMe.html">About me</a></li>
-        <li><a href="Projects.html">Projects</a></li>
-        <li><a href="Contacts.html">Contacts</a></li>
-      </ul>
-    </nav>
-    <img src="waluigi.png">
-  </body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #e74c3c;
+            --accent-color: #f1c40f;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: var(--accent-color);
+        }
+
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: var(--accent-color);
+            padding: 10px 0;
+        }
+
+        .bottom-bar a {
+            color: var(--primary-color);
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .bottom-bar a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to My Portfolio</h1>
+        <p>Hi! I'm [Your Name], a passionate [Your Profession]. I love creating amazing digital experiences and bringing ideas to life through design and code.</p>
+    </div>
+
+    <div class="bottom-bar">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </div>
+</body>
 </html>
