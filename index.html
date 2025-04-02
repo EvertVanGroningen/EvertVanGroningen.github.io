@@ -15,7 +15,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--primary-color);
+            background-color: var(--background-color);
             color: white;
             text-align: center;
         }
@@ -30,24 +30,26 @@
         }
 
         h1 {
-            color: var(--accent-color);
+            color: var(--primary-color);
         }
 
         .bottom-bar {
+            background-color: var(--secondary-color);
+            padding: 25px; /* Increased height */
             position: fixed;
             bottom: 0;
+            left: 0;
             width: 100%;
-            background-color: var(--accent-color);
-            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-
         .bottom-bar a {
-            color: var(--primary-color);
-            margin: 0 15px;
+            color: white;
             text-decoration: none;
-            font-weight: bold;
+            margin: 0 15px;
+            font-size: 18px;
         }
-
         .bottom-bar a:hover {
             text-decoration: underline;
         }
