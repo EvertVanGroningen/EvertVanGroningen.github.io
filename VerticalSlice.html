@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Projects - VerticalSlice</title>
+    <style>
+        :root {
+            --primary-color: #0D0000;
+            --secondary-color: #0C2E59;
+            --background-color: #4E2973;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            color: white;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+        }
+        .project {
+            background: var(--primary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        .project img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 5px;
+        }
+        .project a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: var(--secondary-color);
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .bottom-bar {
+            background-color: var(--secondary-color);
+            padding: 25px; /* Increased height */
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .bottom-bar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+        .bottom-bar a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Vertical Slice</h1>
+        
+        <div class="project">
+            <img src="project1.png" alt="Project 1 Image">
+        </div>
+        
+        <div class="project">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+    </div>
+    
+    <div class="bottom-bar">
+        <a href="Projects.html">Projects</a>
+        <a href="AboutMe.html">About me</a>
+        <a href="Contacts.html">Contacts</a>
+    </div>
+</body>
+</html>
