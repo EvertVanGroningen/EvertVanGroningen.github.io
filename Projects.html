@@ -31,19 +31,30 @@
             max-width: 1000px;
             margin: auto;
             padding: 20px;
-            padding-bottom: 100px; /* or whatever is slightly more than .bottom-bar height */
+            padding-bottom: 100px;
+            text-align: center;
+        }
+
+        /* Flex layout only for the projects */
+        .projects-wrapper {
             display: flex;
-            flex-wrap: wrap; /* allows items to move to the next line */
-            justify-content: center; /* center the rows */
-            gap: 20px; /* space between projects */
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
         }
 
         .project {
             background: var(--primary-color);
             padding: 20px;
             border-radius: 10px;
-            width: calc(50% - 20px); /* two per row, minus the gap */
-            box-sizing: border-box; /* makes padding stay within width */
+            width: calc(50% - 20px);
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 700px) {
+            .project {
+                width: 100%;
+            }
         }
         .project img {
             width: 100%;
@@ -84,23 +95,25 @@
 <body>
     <div class="container">
         <h1>My Projects</h1>
-        
-        <div class="project">
-            <img src="HollowKnightScreener.png">
-            <p>Vertical slice - A recreation of a single scene in the game "Hollow knight".</p>
-            <a href="VerticalSlice.html">More info</a>
-        </div>
-        
-        <div class="project">
-            <img src="TimeStopScreenShot.png">
-            <p>Project starfall - A game I worked on with a larger team.</p>
-            <a href="Starfall.html">More info</a>
-        </div>
-        
-        <div class="project">
-            <img src="Screenshot 2024-12-02 113657.png">
-            <p>Tower defense - A small game about placing towers to stop spirits.</p>
-            <a href="TowerDefense.html">More info</a>
+    
+        <div class="projects-wrapper">
+            <div class="project">
+                <img src="HollowKnightScreener.png">
+                <p>Vertical slice - A recreation of a single scene in the game "Hollow knight".</p>
+                <a href="VerticalSlice.html">More info</a>
+            </div>
+    
+            <div class="project">
+                <img src="TimeStopScreenShot.png">
+                <p>Project starfall - A game I worked on with a larger team.</p>
+                <a href="Starfall.html">More info</a>
+            </div>
+    
+            <div class="project">
+                <img src="Screenshot 2024-12-02 113657.png">
+                <p>Tower defense - A small game about placing towers to stop spirits.</p>
+                <a href="TowerDefense.html">More info</a>
+            </div>
         </div>
     </div>
     
