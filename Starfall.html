@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,13 +17,10 @@
         }
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             background-image: url('photo-1699891730676-037bed3c1bed.jfif');
             background-size: cover;
             background-position: center;
             background-repeat: repeat;
-            background-attachment: scroll;
             color: white;
             text-align: center;
         }
@@ -31,7 +28,7 @@
             max-width: 1000px;
             margin: auto;
             padding: 20px;
-            padding-bottom: 100px; /* or whatever is slightly more than .bottom-bar height */
+            padding-bottom: 120px;
         }
         .project {
             background: var(--primary-color);
@@ -53,9 +50,25 @@
             text-decoration: none;
             border-radius: 5px;
         }
+
+        /* Afbeelding-doos zonder vergroten */
+        .image-box {
+            background: rgba(0, 0, 0, 0.5);
+            display: inline-block;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px;
+        }
+        .image-box img {
+            width: 250px;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Bottom bar */
         .bottom-bar {
             background-color: var(--secondary-color);
-            padding: 25px; /* Increased height */
+            padding: 25px;
             position: fixed;
             bottom: 0;
             left: 0;
@@ -63,43 +76,93 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 15px;
         }
-        .bottom-bar a {
+        .bottom-bar a, .bottom-bar button {
             color: white;
             text-decoration: none;
-            margin: 0 15px;
             font-size: 18px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
         }
-        .bottom-bar a:hover {
+        .bottom-bar a:hover, .bottom-bar button:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Project Starfall</h1>
-        
-        <div class="project">
-            <img src="TimeStopScreenShot.png">
-        </div>
-        
-        <div class="project">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
+<div class="container" id="content">
+    <!-- Dynamische content wordt hier geladen -->
+</div>
 
-        <div class="project">
-            <img src="VisualSheetTimeStopCopy.png"> <img src="TimeBombSubstancePainterScreenshot.png">
-        </div>
+<div class="bottom-bar">
+    <a href="Projects.html">Projects</a>
+    <a href="AboutMe.html">About me</a>
+    <a href="Contacts.html">Contacts</a>
+    <button id="lang-toggle">English</button>
+</div>
 
-        <div class="project">
-            <a href="https://github.com/BAStudio/OperationStarfall/blob/TimeStopItem/Assets/Scripts/Testing/TimeStopAbility.cs" target="_blank">Go to the code</a>
-        </div>
-    </div>
-    
-    <div class="bottom-bar">
-        <a href="Projects.html">Projects</a>
-        <a href="AboutMe.html">About me</a>
-        <a href="Contacts.html">Contacts</a>
-    </div>
+<script>
+    const langToggle = document.getElementById('lang-toggle');
+    const content = document.getElementById('content');
+
+    // ✅ Vertalingen
+    const translations = {
+        nl: {
+            title: "Project Starfall",
+            desc: `Project Starfall is een groepsproject waarbij ik verantwoordelijk was voor het ontwerpen en programmeren van een speciale vaardigheid: de Time Stop Ability.
+                       Dit project hielp mij om beter te leren samenwerken binnen een grotere codebase, en om objectgeoriënteerd te werken in Unity.`,
+            linkText: "Bekijk de code",
+            imageDesc: "Visual design en model van het Time Stop-item"
+        },
+        en: {
+            title: "Project Starfall",
+            desc: `Project Starfall is a group project where I was responsible for designing and programming a special ability: the Time Stop Ability.
+                       This project helped me improve at working within a larger codebase and applying object-oriented programming in Unity.`,
+            linkText: "Go to the code",
+            imageDesc: "Visual design and model of the Time Stop item"
+        }
+    };
+
+    // ✅ Functie om de juiste taal te laden
+    function loadLanguage(lang) {
+        const data = translations[lang];
+        content.innerHTML = `
+                <h1>${data.title}</h1>
+
+                <div class="project">
+                    <img src="TimeStopScreenShot.png" alt="Time Stop Screenshot">
+                </div>
+
+                <div class="project">
+                    <p>${data.desc}</p>
+                </div>
+
+                <div>
+                    <div class="image-box"><img src="VisualSheetTimeStopCopy.png" alt="${data.imageDesc}"></div>
+                    <div class="image-box"><img src="TimeBombSubstancePainterScreenshot.png" alt="${data.imageDesc}"></div>
+                </div>
+
+                <div class="project">
+                    <a href="https://github.com/BAStudio/OperationStarfall/blob/TimeStopItem/Assets/Scripts/Testing/TimeStopAbility.cs" target="_blank">${data.linkText}</a>
+                </div>
+            `;
+        document.documentElement.lang = lang;
+        langToggle.textContent = lang === 'nl' ? 'English' : 'Nederlands';
+    }
+
+    // ✅ Huidige taal laden of standaard NL
+    let currentLang = localStorage.getItem('lang') || 'nl';
+    loadLanguage(currentLang);
+
+    // ✅ Wisselknop
+    langToggle.addEventListener('click', () => {
+        currentLang = currentLang === 'nl' ? 'en' : 'nl';
+        localStorage.setItem('lang', currentLang);
+        loadLanguage(currentLang);
+    });
+</script>
 </body>
 </html>
