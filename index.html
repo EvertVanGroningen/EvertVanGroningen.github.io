@@ -71,14 +71,48 @@
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to My Portfolio</h1>
-        <p>Hi! I'm Evert van Groningen, Unity Front-end Developer</p>
+        <div class="home-content" id="home-content">
+            <!-- Tekst wordt dynamisch geladen door JS -->
+        </div>
     </div>
 
     <div class="bottom-bar">
         <a href="AboutMe.html">About me</a>
         <a href="Contacts.html">Contacts</a>
         <a href="Projects.html">Projects</a>
+        <button id="lang-toggle">English</button>
     </div>
+
+    <script>
+        const langToggle = document.getElementById('lang-toggle');
+        const homeContent = document.getElementById('home-content');
+
+        const translations = {
+            nl: {
+                title: "Welkom op mijn portfolio!",
+                text: "Ik ben Evert van Groningen, een Unity Front-end Developer in opleiding. Bekijk mijn projecten of leer meer over mij."
+            },
+            en: {
+                title: "Welcome to my portfolio!",
+                text: "I’m Evert van Groningen, a Unity Front-end Developer in training. Check out my projects or learn more about me."
+            }
+        };
+
+        function loadLanguage(lang) {
+            const data = translations[lang];
+            homeContent.innerHTML = `<h1>${data.title}</h1><p>${data.text}</p>`;
+            document.documentElement.lang = lang;
+            langToggle.textContent = lang === 'nl' ? 'English' : 'Nederlands';
+        }
+
+        let currentLang = localStorage.getItem('lang') || 'nl';
+        loadLanguage(currentLang);
+
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'nl' ? 'en' : 'nl';
+            localStorage.setItem('lang', currentLang);
+            loadLanguage(currentLang);
+        });
+    </script>
 </body>
 </html>
