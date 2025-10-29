@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,13 +17,10 @@
         }
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             background-image: url('photo-1699891730676-037bed3c1bed.jfif');
             background-size: cover;
             background-position: center;
             background-repeat: repeat;
-            background-attachment: scroll;
             color: white;
             text-align: center;
         }
@@ -32,17 +29,13 @@
             margin: auto;
             padding: 20px;
             padding-bottom: 100px;
-            text-align: center;
         }
-
-        /* Flex layout only for the projects */
         .projects-wrapper {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
         }
-
         .project {
             background: var(--primary-color);
             padding: 20px;
@@ -50,7 +43,6 @@
             width: calc(50% - 20px);
             box-sizing: border-box;
         }
-
         @media (max-width: 700px) {
             .project {
                 width: 100%;
@@ -72,7 +64,7 @@
         }
         .bottom-bar {
             background-color: var(--secondary-color);
-            padding: 25px; /* Increased height */
+            padding: 25px;
             position: fixed;
             bottom: 0;
             left: 0;
@@ -80,47 +72,121 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 15px;
         }
-        .bottom-bar a {
+        .bottom-bar a, .bottom-bar button {
             color: white;
             text-decoration: none;
             margin: 0 15px;
             font-size: 18px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
         }
-        .bottom-bar a:hover {
+        .bottom-bar a:hover, .bottom-bar button:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>My Projects</h1>
-    
-        <div class="projects-wrapper">
-            <div class="project">
-                <img src="HollowKnightScreener.png">
-                <p>Vertical slice - A recreation of a single scene in the game "Hollow knight".</p>
-                <a href="VerticalSlice.html">More info</a>
-            </div>
-    
-            <div class="project">
-                <img src="TimeStopScreenShot.png">
-                <p>Project starfall - A game I worked on with a larger team.</p>
-                <a href="Starfall.html">More info</a>
-            </div>
-    
-            <div class="project">
-                <img src="Screenshot 2024-12-02 113657.png">
-                <p>Tower defense - A small game about placing towers to stop spirits.</p>
-                <a href="TowerDefense.html">More info</a>
-            </div>
-        </div>
-    </div>
-    
-    <div class="bottom-bar">
-        <a href="index.html">Home</a>
-        <a href="AboutMe.html">About me</a>
-        <a href="Contacts.html">Contacts</a>
-    </div>
+<div class="container" id="projects-container">
+    <!-- Tekst wordt via JavaScript geladen -->
+</div>
+
+<div class="bottom-bar">
+    <a href="index.html">Home</a>
+    <a href="AboutMe.html">About me</a>
+    <a href="Contacts.html">Contacts</a>
+    <button id="lang-toggle">English</button>
+</div>
+
+<script>
+    const langToggle = document.getElementById('lang-toggle');
+    const container = document.getElementById('projects-container');
+
+    // ✅ Taaldata
+    const translations = {
+        nl: {
+            title: "Mijn Projecten",
+            projects: [
+                {
+                    img: "HollowKnightScreener.png",
+                    desc: "Vertical Slice - Een recreatie van een scène uit het spel 'Hollow Knight'.",
+                    link: "VerticalSlice.html",
+                    more: "Meer info"
+                },
+                {
+                    img: "TimeStopScreenShot.png",
+                    desc: "Project Starfall - Een game waar ik aan werkte met een groter team.",
+                    link: "Starfall.html",
+                    more: "Meer info"
+                },
+                {
+                    img: "Screenshot 2024-12-02 113657.png",
+                    desc: "Tower Defense - Een klein spel over het plaatsen van torens om geesten tegen te houden.",
+                    link: "TowerDefense.html",
+                    more: "Meer info"
+                }
+            ]
+        },
+        en: {
+            title: "My Projects",
+            projects: [
+                {
+                    img: "HollowKnightScreener.png",
+                    desc: "Vertical Slice - A recreation of a scene from the game 'Hollow Knight'.",
+                    link: "VerticalSlice.html",
+                    more: "More info"
+                },
+                {
+                    img: "TimeStopScreenShot.png",
+                    desc: "Project Starfall - A game I worked on with a larger team.",
+                    link: "Starfall.html",
+                    more: "More info"
+                },
+                {
+                    img: "Screenshot 2024-12-02 113657.png",
+                    desc: "Tower Defense - A small game about placing towers to stop spirits.",
+                    link: "TowerDefense.html",
+                    more: "More info"
+                }
+            ]
+        }
+    };
+
+    // ✅ Functie om de juiste taal te laden
+    function loadLanguage(lang) {
+        const data = translations[lang];
+        let html = `<h1>${data.title}</h1><div class="projects-wrapper">`;
+
+        data.projects.forEach(p => {
+            html += `
+                    <div class="project">
+                        <img src="${p.img}" alt="">
+                        <p>${p.desc}</p>
+                        <a href="${p.link}">${p.more}</a>
+                    </div>
+                `;
+        });
+
+        html += `</div>`;
+        container.innerHTML = html;
+
+        document.documentElement.lang = lang;
+        langToggle.textContent = lang === 'nl' ? 'English' : 'Nederlands';
+    }
+
+    // ✅ Huidige taal laden of default Nederlands
+    let currentLang = localStorage.getItem('lang') || 'nl';
+    loadLanguage(currentLang);
+
+    // ✅ Wisselknop
+    langToggle.addEventListener('click', () => {
+        currentLang = currentLang === 'nl' ? 'en' : 'nl';
+        localStorage.setItem('lang', currentLang);
+        loadLanguage(currentLang);
+    });
+</script>
 </body>
 </html>
