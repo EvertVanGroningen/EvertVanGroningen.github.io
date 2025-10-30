@@ -55,6 +55,24 @@
             line-height: 1.6;
         }
 
+        /* Stijl voor de CV-link */
+        .cv-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--secondary-color);
+            font-weight: bold;
+            text-decoration: none;
+            border: 2px solid var(--secondary-color);
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .cv-link:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
         .profile-img {
             width: 300px;
             height: 300px;
@@ -63,7 +81,6 @@
             flex-shrink: 0;
         }
 
-        /* Responsive weergave: afbeelding boven de tekst op mobiel */
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
@@ -80,7 +97,6 @@
             }
         }
 
-        /* Bottom bar */
         .bottom-bar {
             background-color: var(--secondary-color);
             padding: 25px;
@@ -132,17 +148,23 @@
     const translations = {
         nl: {
             title: "Evert van Groningen",
-            text: "Unity Front-end Developer in opleiding. Bekijk mijn projecten of leer meer over mij."
+            text: "Unity Front-end Developer in opleiding. Bekijk mijn projecten of leer meer over mij.",
+            cv: "Bekijk mijn CV"
         },
         en: {
             title: "Evert van Groningen",
-            text: "Unity Front-end Developer in training. Check out my projects or learn more about me."
+            text: "Unity Front-end Developer in training. Check out my projects or learn more about me.",
+            cv: "View my CV"
         }
     };
 
     function loadLanguage(lang) {
         const data = translations[lang];
-        homeContent.innerHTML = `<h1>${data.title}</h1><p>${data.text}</p>`;
+        homeContent.innerHTML = `
+            <h1>${data.title}</h1>
+            <p>${data.text}</p>
+            <a href="CV.pdf" class="cv-link" target="_blank">${data.cv}</a>
+        `;
         document.documentElement.lang = lang;
         langToggle.textContent = lang === 'nl' ? 'English' : 'Nederlands';
     }
