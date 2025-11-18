@@ -41,7 +41,7 @@
         }
         .container {
             display: flex;
-            align-items: center;
+            align-items: start;
             justify-content: space-around;
             width: 80%;
             max-width: 900px;
@@ -55,9 +55,12 @@
             margin-left: 20px;
             margin-bottom: 5px;
         }
+        .about-section {
+            margin-bottom: 20px;
+        }
         .bottom-bar {
             background-color: var(--secondary-color);
-            padding: 25px; /* Increased height */
+            padding: 25px;
             position: fixed;
             bottom: 0;
             left: 0;
@@ -66,85 +69,82 @@
             justify-content: center;
             align-items: center;
         }
-        .bottom-bar a {
+        .bottom-bar a, .bottom-bar button {
             color: white;
             text-decoration: none;
             margin: 0 15px;
             font-size: 18px;
+            background: none;
+            border: none;
+            cursor: pointer;
         }
-        .bottom-bar a:hover {
+        .bottom-bar a:hover, .bottom-bar button:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <img src="IMG-20231201-WA00001.jpg" alt="Profile Image" class="profile-img">
-    <p style="color: white;">Unity Front-end Developer</p>
-    <div class="container">
-        <div class="about-text" id="about-text">
-            <!-- Tekst wordt dynamisch geladen door JS -->
-        </div>
-    </div>
-    <div class="bottom-bar">
-        <a href="AboutMe.html">About me</a>
-        <a href="Contacts.html">Contacts</a>
-        <a href="Projects.html">Projects</a>
-        <button id="lang-toggle">English</button>
-    </div>
+<img src="IMG-20231201-WA00001.jpg" alt="Profile Image" class="profile-img">
+<p style="color: white;">Unity Front-end Developer</p>
+<div class="container">
+    <div class="about-text" id="about-text"></div>
+</div>
 
-    <script>
-        const langToggle = document.getElementById('lang-toggle');
-        const aboutText = document.getElementById('about-text');
+<div class="bottom-bar">
+    <a href="AboutMe.html">About me</a>
+    <a href="Contacts.html">Contacts</a>
+    <a href="Projects.html">Projects</a>
+    <button id="lang-toggle">English</button>
+</div>
 
-        // Teksten voor beide talen
-        const translations = {
-            nl: {
-                aboutTitle: "Over Mij",
-                aboutBody: `Mijn naam is Evert van Groningen. Ik ben geboren en woon momenteel in Enkhuizen, samen met mijn ouders, mijn broer, twee zussen en twee katten. En nee, ik kom niet uit Groningen — veel mensen maken die fout.
+<script>
+    const langToggle = document.getElementById('lang-toggle');
+    const aboutText = document.getElementById('about-text');
 
-                In 2023 ben ik begonnen met mijn opleiding Software Development aan het Mediacollege Amsterdam. Ik had nog geen eerdere ervaring met programmeren, maar van alle open dagen waar ik naartoe ging, leek deze opleiding mij het leukst.
+    const translations = {
+        nl: {
+            aboutTitle: "Over Mij",
+            part1: `Mijn naam is Evert van Groningen. Ik ben geboren en woon momenteel in Enkhuizen, samen met mijn ouders, mijn broer, twee zussen en twee katten. En nee, ik kom niet uit Groningen — veel mensen maken die fout.
 
-                In het eerste halfjaar van jaar één hebben we gewerkt met JavaScript en HTML. Aan het einde van dat halve jaar kregen we de keuze om Media Developer of Game Developer te worden. Toen heb ik gekozen voor Game Developer.
+                In 2023 ben ik begonnen met mijn opleiding Software Development aan het Mediacollege Amsterdam. Ik had nog geen eerdere ervaring met programmeren, maar van alle open dagen waar ik naartoe ging, leek deze opleiding mij het leukst.`,
+            part2: `In het eerste halfjaar van jaar één hebben we gewerkt met JavaScript en HTML. Aan het einde van dat halve jaar kregen we de keuze om Media Developer of Game Developer te worden. Toen heb ik gekozen voor Game Developer.
 
                 Nu liggen mijn programmeervaardigheden vooral in C#, werken met Unity en GitHub. Ik heb ook een beetje ervaring met Blender en Substance Painter, maar nog niet genoeg om dat als een van mijn vaardigheden neer te zetten.
 
                 In mijn vrije tijd ben ik veel aan het gamen. Ik ben een grote fan van games zoals Hollow Knight, Hades en vechtgames. Daarnaast houd ik van series kijken en muziek luisteren. Ik wilde zelf ook een instrument leren, maar het enige instrument waar ik toegang toe had, was een gitaar — en dat bleek niet echt iets voor mij. Ooit wil ik graag weer iets anders oppakken, als ik toegang krijg tot een ander instrument.`
-            },
-            en: {
-                aboutTitle: "About Me",
-                aboutBody: `My name is Evert van Groningen. I was born and currently live in Enkhuizen with my parents, my brother, two sisters, and two cats. And no, I'm not from Groningen — people often make that mistake.
+        },
+        en: {
+            aboutTitle: "About Me",
+            part1: `My name is Evert van Groningen. I was born and currently live in Enkhuizen with my parents, my brother, two sisters, and two cats. And no, I'm not from Groningen — people often make that mistake.
 
-                In 2023, I started studying Software Development at Mediacollege Amsterdam. I had no prior programming experience, but of all the open days I attended, this program seemed the most fun.
-
-                In the first half of the first year, we worked with JavaScript and HTML. At the end of that period, we could choose between becoming a Media Developer or a Game Developer. I chose Game Developer.
+                In 2023, I started studying Software Development at Mediacollege Amsterdam. I had no prior programming experience, but of all the open days I attended, this program seemed the most fun.`,
+            part2: `In the first half of the first year, we worked with JavaScript and HTML. At the end of that period, we could choose between becoming a Media Developer or a Game Developer. I chose Game Developer.
 
                 Now, my programming skills mainly lie in C#, Unity and GitHub. I also have some experience with Blender and Substance Painter, but not enough to list them as main skills.
 
                 In my free time, I play a lot of games. I'm a big fan of titles like Hollow Knight, Hades, and fighting games. I also enjoy watching series and listening to music. I once tried learning an instrument, but the only one I had access to was a guitar — and that turned out not to be my thing. One day, I’d like to try another instrument if I get the chance.`
-            }
-        };
-
-        // Functie om de tekst te laden
-        function loadLanguage(lang) {
-            const data = translations[lang];
-            aboutText.innerHTML = `
-                <h2>${data.aboutTitle}</h2>
-                <p>${data.aboutBody}</p>
-            `;
-            document.documentElement.lang = lang;
-            langToggle.textContent = lang === 'nl' ? 'English' : 'Nederlands';
         }
+    };
 
-        // Haal taal op uit localStorage of standaard 'nl'
-        let currentLang = localStorage.getItem('lang') || 'nl';
+    function loadLanguage(lang) {
+        const data = translations[lang];
+        aboutText.innerHTML = `
+                <h2>${data.aboutTitle}</h2>
+                <div class="about-section"><p>${data.part1}</p></div>
+                <div class="about-section"><p>${data.part2}</p></div>
+            `;
+        document.documentElement.lang = lang;
+        langToggle.textContent = lang === 'nl' ? 'English' : 'Nederlands';
+    }
+
+    let currentLang = localStorage.getItem('lang') || 'nl';
+    loadLanguage(currentLang);
+
+    langToggle.addEventListener('click', () => {
+        currentLang = currentLang === 'nl' ? 'en' : 'nl';
+        localStorage.setItem('lang', currentLang);
         loadLanguage(currentLang);
-
-        // Wissel van taal bij klikken
-        langToggle.addEventListener('click', () => {
-            currentLang = currentLang === 'nl' ? 'en' : 'nl';
-            localStorage.setItem('lang', currentLang);
-            loadLanguage(currentLang);
-        });
-    </script>
+    });
+</script>
 </body>
 </html>
