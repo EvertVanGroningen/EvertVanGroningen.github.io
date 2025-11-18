@@ -98,9 +98,9 @@
 </div>
 
 <div class="bottom-bar">
-    <a href="Projects.html">Projects</a>
     <a href="AboutMe.html">About me</a>
     <a href="Contacts.html">Contacts</a>
+    <a href="Projects.html">Projects</a>
     <button id="lang-toggle">English</button>
 </div>
 
@@ -111,16 +111,14 @@
     // ✅ Vertalingen
     const translations = {
         nl: {
-            title: "Project Starfall",
-            desc: `Project Starfall is een groepsproject waarbij ik verantwoordelijk was voor het ontwerpen en programmeren van een speciale vaardigheid: de Time Stop Ability.
-                       Dit project hielp mij om beter te leren samenwerken binnen een grotere codebase, en om objectgeoriënteerd te werken in Unity.`,
+            title: "Time-stop item",
+            desc: `In een groepsproject genaamd Project starfall had ik een item gamaakt die de tijd stil zou zetten in een ruimte rond de speler.`,
             linkText: "Bekijk de code",
             imageDesc: "Visual design en model van het Time Stop-item"
         },
         en: {
-            title: "Project Starfall",
-            desc: `Project Starfall is a group project where I was responsible for designing and programming a special ability: the Time Stop Ability.
-                       This project helped me improve at working within a larger codebase and applying object-oriented programming in Unity.`,
+            title: "Time-stop item  ",
+            desc: `In a group project called Project Starfall I created an item that would freeze time in a space around the player.`,
             linkText: "Go to the code",
             imageDesc: "Visual design and model of the Time Stop item"
         }
@@ -146,7 +144,7 @@
                 </div>
 
                 <div class="project">
-                    <a href="https://github.com/BAStudio/OperationStarfall/blob/TimeStopItem/Assets/Scripts/Testing/TimeStopAbility.cs" target="_blank">${data.linkText}</a>
+                    <a href="https://github.com/EvertVanGroningen/TimeStop" target="_blank">${data.linkText}</a>
                 </div>
             `;
         document.documentElement.lang = lang;

@@ -161,10 +161,15 @@
     function loadLanguage(lang) {
         const data = translations[lang];
         homeContent.innerHTML = `
-            <h1>${data.title}</h1>
-            <p>${data.text}</p>
-            <a href="CV.pdf" class="cv-link" target="_blank">${data.cv}</a>
-        `;
+        <h1>${data.title}</h1>
+        <p>${data.text}</p>
+
+        <!-- Nieuwe Projects-knop -->
+        <a href="Projects.html" class="cv-link">${lang === 'nl' ? 'Bekijk mijn Projecten' : 'View my Projects'}</a>
+
+        <!-- Bestaande CV-knop -->
+        <a href="CV.pdf" class="cv-link" target="_blank">${data.cv}</a>
+    `;
         document.documentElement.lang = lang;
         langToggle.textContent = lang === 'nl' ? 'English' : 'Nederlands';
     }
