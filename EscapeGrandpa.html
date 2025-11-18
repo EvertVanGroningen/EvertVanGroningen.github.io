@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Projects - Anomaly Spotter</title>
+    <style>
+        :root {
+            --primary-color: #0D0000;
+            --secondary-color: #0C2E59;
+            --background-color: #4E2973;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('photo-1699891730676-037bed3c1bed.jfif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: repeat;
+            background-attachment: scroll;
+            color: white;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        body.fade-in {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+
+        .project {
+            background: var(--primary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .project img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 5px;
+        }
+
+        .project a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: var(--secondary-color);
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .bottom-bar {
+            background-color: var(--secondary-color);
+            padding: 25px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .bottom-bar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 18px;
+        }
+
+        .bottom-bar a:hover {
+            text-decoration: underline;
+        }
+
+        #lang-toggle {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        #lang-toggle:hover {
+            background-color: white;
+            color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 id="title">Escape grandpa</h1>
+
+    <div class="project">
+        <img src="Anomaly.png" alt="Anomaly Spotter Screenshot">
+    </div>
+
+    <div class="project">
+        <p id="description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+    </div>
+
+    <div class="project">
+        <a id="code-link" href="https://github.com/EvertVanGroningen/GameJamSep2025" target="_blank">Go to the code</a>
+    </div>
+</div>
+
+<div class="bottom-bar">
+    <a href="AboutMe.html">About me</a>
+    <a href="Contacts.html">Contacts</a>
+    <a href="Projects.html">Projects</a>
+    <button id="lang-toggle">English</button>
+</div>
+
+<script>
+    // --- Fade-in bij laden ---
+    window.addEventListener("DOMContentLoaded", () => {
+        document.body.classList.add("fade-in");
+    });
+
+    // --- Fade-out bij navigatie ---
+    const links = document.querySelectorAll("a[href]");
+    links.forEach(link => {
+        link.addEventListener("click", function(e) {
+            const href = this.getAttribute("href");
+            if (!href.startsWith("#") && href !== "") {
+                e.preventDefault();
+                document.body.classList.remove("fade-in");
+                document.body.style.opacity = 0;
+                setTimeout(() => {
+                    window.location = href;
+                }, 300);
+            }
+        });
+    });
+
+    // --- Meertaligheid ---
+    const langToggle = document.getElementById('lang-toggle');
+    const title = document.getElementById('title');
+    const description = document.getElementById('description');
+    const codeLink = document.getElementById('code-link');
+    const projectsLink = document.getElementById('projects-link');
+    const aboutLink = document.getElementById('about-link');
+    const contactsLink = document.getElementById('contacts-link');
+
+    const translations = {
+        nl: {
+            title: "Escape grandpa",
+            description: "Een game gemaakt tijdens een game jam waarin je afwijkingen moet opsporen. Al is iets anders dan normaal, dan moet je dat aanwijzen en al heb je het 3 keer fout dan verlies je.",
+            codeLink: "Bekijk de code",
+            projects: "Projecten",
+            about: "Over mij",
+            contacts: "Contact",
+        },
+        en: {
+            title: "Escape grandpa",
+            description: "A game made during a game jam where you must spot anomalies. If something is different than usual, you need to point it out and if you are wrong 3 times then you lose.",
+            codeLink: "Go to the code",
+            projects: "Projects",
+            about: "About me",
+            contacts: "Contacts",
+        }
+    };
+
+    function loadLanguage(lang) {
+        const data = translations[lang];
+        title.textContent = data.title;
+        description.textContent = data.description;
+        codeLink.textContent = data.codeLink;
+        projectsLink.textContent = data.projects;
+        aboutLink.textContent = data.about;
+        contactsLink.textContent = data.contacts;
+        langToggle.textContent = lang === 'nl' ? 'English' : 'Nederlands';
+        document.documentElement.lang = lang;
+    }
+
+    let currentLang = localStorage.getItem('lang') || 'nl';
+    loadLanguage(currentLang);
+
+    langToggle.addEventListener('click', () => {
+        currentLang = currentLang === 'nl' ? 'en' : 'nl';
+        localStorage.setItem('lang', currentLang);
+        loadLanguage(currentLang);
+    });
+</script>
+</body>
+</html>
