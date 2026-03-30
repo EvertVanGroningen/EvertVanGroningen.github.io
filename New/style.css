@@ -1,0 +1,27 @@
+
+header {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 20px 0 20px 20px;
+	background: none;
+}
+
+header a {
+	color: inherit;
+	text-decoration: none;
+	margin-right: 24px;
+	font-size: 18px;
+	padding: 6px 10px;
+	transition: background 0.2s, color 0.2s;
+}
+
+header a:last-child {
+	margin-right: 0;
+}
+
+header a:hover {
+	background: #ececec;
+	color: #a30730;
+	border-radius: 4px;
+}
