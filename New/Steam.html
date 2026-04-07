@@ -7,16 +7,47 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <script src="script.js"></script>
     <header>
-        <a href="index.html">Home</a>
-        <a href="index.html">About</a>
-        <a href="index.html">Projects</a>
-        <a href="index.html">Contact</a>
+        <a href="../index.html">Home</a>
+        <a href="../index.html">Projects</a>
+        <a href="../index.html">About</a>
+        <a href="../index.html">Contact</a>
     </header>
     <main>
-        <body>
-
-        </body>
+        <section class="boutme">
+            <div class="image-box">
+                <img src="../IMG-20231201-WA00001.jpg" alt="Foto van Evert">
+            </div>
+            <div class="text-box">
+                <h1>Evert Van Groningen</h1>
+                <p>Text to go here.</p>
+            </div>
+        </section>
+        <section class="projectsSection">
+            <button class="scroll-btn left" onclick="scrollProjects(-1)">❮</button>
+            <div class="projectScroller">
+                <div class="project-box active">
+                    <img src="../Spirit.png" alt="Project 1" class="project-image">
+                    <h3>Project 1</h3>
+                    <p>Edit this text for Project 1</p>
+                    <a href="../index.html">link</a>
+                </div>
+                <div class="project-box">
+                    <img src="../Spirit.png" alt="Project 2" class="project-image">
+                    <h3>Project 2</h3>
+                    <p>Edit this text for Project 2</p>
+                    <a href="../index.html">link</a>
+                </div>
+                <div class="project-box">
+                    <img src="../Spirit.png" alt="Project 3" class="project-image">
+                    <h3>Project 3</h3>
+                    <p>Edit this text for Project 3</p>
+                    <a href="../index.html">link</a>
+                </div>
+            </div>
+            <button class="scroll-btn right" onclick="scrollProjects(1)">❯</button>
+        </section>
     </main>
 </body>
 </html>
