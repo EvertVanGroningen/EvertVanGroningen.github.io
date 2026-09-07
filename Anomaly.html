@@ -105,6 +105,41 @@
             background-color: white;
             color: var(--secondary-color);
         }
+
+        .zoomable {
+            cursor: zoom-in;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .zoomable:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.35);
+        }
+
+        .lightbox-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+            cursor: zoom-out;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-image {
+            max-width: 90vw;
+            max-height: 80vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            object-fit: contain;
+            background: rgba(255, 255, 255, 0.08);
+        }
     </style>
 </head>
 <body>
@@ -122,9 +157,15 @@
     </div>
 
     <div class="project">
+        <img src="Images/AnomalyPickerCode.png" alt="Anomaly Spotter Screenshot">
+    </div>
+
+    <div class="project">
         <a id="code-link" href="https://github.com/EvertVanGroningen/GameJamSep2025" target="_blank">Go to the code</a>
     </div>
 </div>
+
+<div id="lightbox-overlay" class="lightbox-overlay" aria-hidden="true"></div>
 
 <div class="bottom-bar">
     <a href="AboutMe.html">About me</a>
@@ -134,9 +175,51 @@
 </div>
 
 <script>
+    const lightboxOverlay = document.getElementById('lightbox-overlay');
+
+    function closeLightbox() {
+        if (!lightboxOverlay) return;
+        lightboxOverlay.classList.remove('active');
+        lightboxOverlay.innerHTML = '';
+        lightboxOverlay.setAttribute('aria-hidden', 'true');
+    }
+
+    function bindZoomableImages() {
+        document.querySelectorAll('img').forEach((img) => {
+            if (img.dataset.zoomBound === 'true') return;
+            img.classList.add('zoomable');
+            img.dataset.zoomBound = 'true';
+            img.addEventListener('click', (event) => {
+                event.stopPropagation();
+                if (!lightboxOverlay) return;
+                const clone = img.cloneNode(true);
+                clone.classList.add('lightbox-image');
+                lightboxOverlay.innerHTML = '';
+                lightboxOverlay.appendChild(clone);
+                lightboxOverlay.classList.add('active');
+                lightboxOverlay.setAttribute('aria-hidden', 'false');
+            });
+        });
+    }
+
+    if (lightboxOverlay) {
+        lightboxOverlay.addEventListener('click', (event) => {
+            if (event.target === lightboxOverlay) closeLightbox();
+        });
+
+        document.addEventListener('click', (event) => {
+            if (lightboxOverlay.classList.contains('active') &&
+                !event.target.closest('.lightbox-image') &&
+                !event.target.closest('.zoomable')) {
+                closeLightbox();
+            }
+        });
+    }
+
     // --- Fade-in bij laden ---
     window.addEventListener("DOMContentLoaded", () => {
         document.body.classList.add("fade-in");
+        bindZoomableImages();
     });
 
     // --- Fade-out bij navigatie ---
@@ -160,9 +243,9 @@
     const title = document.getElementById('title');
     const description = document.getElementById('description');
     const codeLink = document.getElementById('code-link');
-    const projectsLink = document.getElementById('projects-link');
-    const aboutLink = document.getElementById('about-link');
-    const contactsLink = document.getElementById('contacts-link');
+    const projectsLink = document.querySelector('.bottom-bar a[href="Projects.html"]');
+    const aboutLink = document.querySelector('.bottom-bar a[href="AboutMe.html"]');
+    const contactsLink = document.querySelector('.bottom-bar a[href="Contacts.html"]');
 
     const translations = {
         nl: {
@@ -185,12 +268,13 @@
 
     function loadLanguage(lang) {
         const data = translations[lang];
+        closeLightbox();
         title.textContent = data.title;
         description.textContent = data.description;
         codeLink.textContent = data.codeLink;
-        projectsLink.textContent = data.projects;
-        aboutLink.textContent = data.about;
-        contactsLink.textContent = data.contacts;
+        if (projectsLink) projectsLink.textContent = data.projects;
+        if (aboutLink) aboutLink.textContent = data.about;
+        if (contactsLink) contactsLink.textContent = data.contacts;
         langToggle.textContent = lang === 'nl' ? 'English' : 'Nederlands';
         document.documentElement.lang = lang;
     }

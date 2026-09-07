@@ -90,12 +90,49 @@
         .bottom-bar a:hover, .bottom-bar button:hover {
             text-decoration: underline;
         }
+
+        .zoomable {
+            cursor: zoom-in;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .zoomable:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.35);
+        }
+
+        .lightbox-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+            cursor: zoom-out;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-image {
+            max-width: 90vw;
+            max-height: 80vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            object-fit: contain;
+            background: rgba(255, 255, 255, 0.08);
+        }
     </style>
 </head>
 <body>
 <div class="container" id="content">
     <!-- Dynamische content wordt hier geladen -->
 </div>
+
+<div id="lightbox-overlay" class="lightbox-overlay" aria-hidden="true"></div>
 
 <div class="bottom-bar">
     <a href="AboutMe.html">About me</a>
@@ -107,6 +144,46 @@
 <script>
     const langToggle = document.getElementById('lang-toggle');
     const content = document.getElementById('content');
+    const lightboxOverlay = document.getElementById('lightbox-overlay');
+
+    function closeLightbox() {
+        if (!lightboxOverlay) return;
+        lightboxOverlay.classList.remove('active');
+        lightboxOverlay.innerHTML = '';
+        lightboxOverlay.setAttribute('aria-hidden', 'true');
+    }
+
+    function bindZoomableImages() {
+        document.querySelectorAll('img').forEach((img) => {
+            if (img.dataset.zoomBound === 'true') return;
+            img.classList.add('zoomable');
+            img.dataset.zoomBound = 'true';
+            img.addEventListener('click', (event) => {
+                event.stopPropagation();
+                if (!lightboxOverlay) return;
+                const clone = img.cloneNode(true);
+                clone.classList.add('lightbox-image');
+                lightboxOverlay.innerHTML = '';
+                lightboxOverlay.appendChild(clone);
+                lightboxOverlay.classList.add('active');
+                lightboxOverlay.setAttribute('aria-hidden', 'false');
+            });
+        });
+    }
+
+    if (lightboxOverlay) {
+        lightboxOverlay.addEventListener('click', (event) => {
+            if (event.target === lightboxOverlay) closeLightbox();
+        });
+
+        document.addEventListener('click', (event) => {
+            if (lightboxOverlay.classList.contains('active') &&
+                !event.target.closest('.lightbox-image') &&
+                !event.target.closest('.zoomable')) {
+                closeLightbox();
+            }
+        });
+    }
 
     // ✅ Vertalingen
     const translations = {
@@ -114,19 +191,22 @@
             title: "Time-stop item",
             desc: `In een groepsproject genaamd Project starfall had ik een item gamaakt die de tijd stil zou zetten in een ruimte rond de speler.`,
             linkText: "Bekijk de code",
-            imageDesc: "Visual design en model van het Time Stop-item"
+            imageDesc: "Visual design en model van het Time Stop-item",
+            additText: "Dit project is gemaakt in Unity en C# en is onderdeel van een groter project genaamd Project Starfall. Mijn item, de time stop, was de eerste en tot nu toe enigste item die contact heeft met de vijanden en ze niet kapot maakt."
         },
         en: {
             title: "Time-stop item  ",
             desc: `In a group project called Project Starfall I created an item that would freeze time in a space around the player.`,
             linkText: "Go to the code",
-            imageDesc: "Visual design and model of the Time Stop item"
+            imageDesc: "Visual design and model of the Time Stop item",
+            additText: "This project is made in Unity and C# and is part of a larger project called Project Starfall. My item, the time stop, was the first and so far only item that has contact with the enemies and doesn't destroy them."
         }
     };
 
     // ✅ Functie om de juiste taal te laden
     function loadLanguage(lang) {
         const data = translations[lang];
+        closeLightbox();
         content.innerHTML = `
                 <h1>${data.title}</h1>
 
@@ -140,6 +220,7 @@
 
                 <div>
                     <div class="project"><img src="VisualSheetTimeStopCopy.png" alt="${data.imageDesc}"></div>
+                    <div class="project"><p>${data.additText}</p></div>
                     <div class="project"><img src="TimeBombSubstancePainterScreenshot.png" alt="${data.imageDesc}"></div>
                 </div>
 
@@ -147,6 +228,7 @@
                     <a href="https://github.com/EvertVanGroningen/TimeStop" target="_blank">${data.linkText}</a>
                 </div>
             `;
+        bindZoomableImages();
         document.documentElement.lang = lang;
         langToggle.textContent = lang === 'nl' ? 'English' : 'Nederlands';
     }

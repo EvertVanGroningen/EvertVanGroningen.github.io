@@ -76,12 +76,49 @@
         .bottom-bar a:hover, .bottom-bar button:hover {
             text-decoration: underline;
         }
+
+        .zoomable {
+            cursor: zoom-in;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .zoomable:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.35);
+        }
+
+        .lightbox-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+            cursor: zoom-out;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-image {
+            max-width: 90vw;
+            max-height: 80vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            object-fit: contain;
+            background: rgba(255, 255, 255, 0.08);
+        }
     </style>
 </head>
 <body>
 <div class="container" id="content">
     <!-- Tekst wordt geladen via JavaScript -->
 </div>
+
+<div id="lightbox-overlay" class="lightbox-overlay" aria-hidden="true"></div>
 
 <div class="bottom-bar">
     <a href="AboutMe.html">About me</a>
@@ -93,6 +130,46 @@
 <script>
     const langToggle = document.getElementById('lang-toggle');
     const content = document.getElementById('content');
+    const lightboxOverlay = document.getElementById('lightbox-overlay');
+
+    function closeLightbox() {
+        if (!lightboxOverlay) return;
+        lightboxOverlay.classList.remove('active');
+        lightboxOverlay.innerHTML = '';
+        lightboxOverlay.setAttribute('aria-hidden', 'true');
+    }
+
+    function bindZoomableImages() {
+        document.querySelectorAll('img').forEach((img) => {
+            if (img.dataset.zoomBound === 'true') return;
+            img.classList.add('zoomable');
+            img.dataset.zoomBound = 'true';
+            img.addEventListener('click', (event) => {
+                event.stopPropagation();
+                if (!lightboxOverlay) return;
+                const clone = img.cloneNode(true);
+                clone.classList.add('lightbox-image');
+                lightboxOverlay.innerHTML = '';
+                lightboxOverlay.appendChild(clone);
+                lightboxOverlay.classList.add('active');
+                lightboxOverlay.setAttribute('aria-hidden', 'false');
+            });
+        });
+    }
+
+    if (lightboxOverlay) {
+        lightboxOverlay.addEventListener('click', (event) => {
+            if (event.target === lightboxOverlay) closeLightbox();
+        });
+
+        document.addEventListener('click', (event) => {
+            if (lightboxOverlay.classList.contains('active') &&
+                !event.target.closest('.lightbox-image') &&
+                !event.target.closest('.zoomable')) {
+                closeLightbox();
+            }
+        });
+    }
 
     // ✅ Vertalingen
     const translations = {
@@ -117,6 +194,7 @@
     // ✅ Functie om de juiste taal te laden
     function loadLanguage(lang) {
         const data = translations[lang];
+        closeLightbox();
         content.innerHTML = `
                 <h1>${data.title}</h1>
                 <div class="project">
@@ -129,6 +207,7 @@
                     <a href="https://github.com/Catmanjo/BOM6-Game/tree/main/My%20project/Assets/Scripts/Movement" target="_blank">${data.linkText}</a>
                 </div>
             `;
+        bindZoomableImages();
         document.documentElement.lang = lang;
         langToggle.textContent = lang === 'nl' ? 'English' : 'Nederlands';
     }

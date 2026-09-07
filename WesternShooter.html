@@ -190,20 +190,20 @@
     // ✅ Taaldata
     const translations = {
         nl: {
-            title: "Tower Defense",
-            desc: `Tower Defense is een klein project dat ik heb gemaakt tijdens mijn opleiding. 
-                       In dit spel plaats je torens die vijanden proberen te stoppen voordat ze het einde bereiken. 
-                       Het project was een goede oefening in objectgeoriënteerd programmeren en het werken met Unity.`,
+            title: "Western Shooter",
+            desc: `Western Shooter is een klein project dat ik heb gemaakt tijdens een game jam. 
+                   Dit is een multiplayer arcade spel waarin je sneller dan de andere speler op doelwitten moet schieten `,
             linkText: "Bekijk de code",
-            images: ["Spirit.png", "TowerRed.png"]
+            DescText1: "Het script hierboven laat zien hoe er word gekozen welke controls er gebruikt worden en hoe je bezeegt met de controls",
+            DescText2: "Het script hierboven laat zien hoe er word geschoten en hoe de doelwitten geraakt kunnen worden"
         },
         en: {
-            title: "Tower Defense",
-            desc: `Tower Defense is a small project I made during my studies. 
-                       In this game, you place towers that try to stop enemies before they reach the end. 
-                       It was a good exercise in object-oriented programming and working with Unity.`,
+            title: "Western Shooter",
+            desc: `Western Shooter is a small project I made during a game jam. 
+                       This is a multiplayer arcade game where you need to shoot targets faster than the other player.`,
             linkText: "Go to the code",
-            images: ["Spirit.png", "TowerRed.png"]
+            DescText1: "The script above shows how the controls are chosen and how you move with the controls",
+            DescText2: "The script above shows how shooting is implemented and how targets can be hit"
         }
     };
 
@@ -214,17 +214,25 @@
         content.innerHTML = `
                 <h1>${data.title}</h1>
                 <div class="project">
-                    <img src="Screenshot 2024-12-02 113657.png" alt="TowerDefense Screenshot">
+                    <img src="Images/WesternShooterGif.gif" alt="WesternShooter Screenshot">
                 </div>
                 <div class="project">
                     <p>${data.desc}</p>
                 </div>
-                <div class="image-box">
-                    <img src="${data.images[0]}" alt="Spirit">
-                    <img src="${data.images[1]}" alt="Tower">
+                <div class="project">
+                    <img src="Images/WesternShooterControllsCode.png" alt="WesternShooter Screenshot 2">
                 </div>
                 <div class="project">
-                    <a href="https://github.com/EvertVanGroningen/TowerDefense/tree/main/TowerDefenseGame/Assets" target="_blank">${data.linkText}</a>
+                    <p>${data.DescText1}</p>
+                </div>
+                <div class="project">
+                    <img src="Images/WesternShooterShootCode.png" alt="WesternShooter Screenshot 2">
+                </div>
+                <div class="project">
+                    <p>${data.DescText2}</p>
+                </div>
+                <div class="project">
+                    <a href="https://github.com/Zakaria8002/gamejam-2627-gd-fs-team-07" target="_blank">${data.linkText}</a>
                 </div>
             `;
         bindZoomableImages();
